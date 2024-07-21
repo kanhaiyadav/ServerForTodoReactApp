@@ -1,0 +1,32 @@
+div[id = "sidebar"] {
+    height: 90vh;
+    position: fixed;
+    left: 10px;
+    top:25px;
+    padding: $base-td-padding*2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    font-size: $base-font-size;
+    button{
+        font-size: $base-font-size;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+        padding: $base-padding;
+        border: 1px solid $base-style-color;
+        i{
+            color:$base-style-color;
+        }
+    }
+    >i{
+        color: white;
+        padding: $base-padding;
+        border-radius: 50%;
+        &:hover{
+            background-color: $alternate-color;
+        }
+    }
+}

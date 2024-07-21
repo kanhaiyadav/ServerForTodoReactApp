@@ -1,0 +1,35 @@
+@import "./mixin";
+@import "./variables.scss";
+* {
+    margin: 0px;
+}
+body {
+    overflow: hidden;
+    background-image: url(../images/b5.jpg);
+    backdrop-filter: blur(3px);
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: sans-serif;
+    @import "./home_scss/sidebar";
+    @import "./home_scss/nav";
+    @import "./home_scss/main";
+}
+
+.list {
+    height: 0px;
+    bottom: 0%;
+}
+
+.active {
+    height: 250px;
+    bottom: -370%;
+}
+
+.initial {
+    display: none;
+}

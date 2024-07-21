@@ -1,0 +1,97 @@
+@import "./variables.scss";
+@import "./mixin";
+body {
+    font-family: $base-font-family;
+    background-image: url(../images/b5.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    backdrop-filter: blur(5px);
+    min-height: 100vh;
+    nav {
+        position: relative;
+        top: 10px;
+        width: 98%;
+        margin: auto;
+        padding: $base-padding;
+        @include center(row);
+        background-color: rgba(200, 200, 200, 0.662);
+        border: 2px solid white;
+        border-radius: $base-border-radius * 2.5;
+        div {
+            position: relative;
+            padding: 2px $base-padding;
+            border-radius: $base-border-radius * 1.5;
+            background: white;
+            padding: 4px $base-padding;
+            margin-right: 30px;
+            @include center(row);
+            img {
+                width: 45px;
+            }
+            span {
+                font-size: 2.5rem;
+                font-weight: 700;
+                font-style: italic;
+                color: rgb(59, 68, 91);
+                vertical-align: center;
+            }
+        }
+        a[class="nav-link"] {
+            margin: 0px 30px;
+            font-size: $base-font-size;
+            position: relative;
+            text-decoration: none;
+            color: $base-style-color;
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                right: 0;
+                height: 3px;
+                background-color: white;
+                transition: 0.3s ease-in-out;
+                transform: scaleX(0%);
+            }
+            &:hover::before {
+                transform: scaleX(100%);
+            }
+        }
+        a:last-child {
+            position: absolute;
+            right: 0;
+            margin: 0px $base-margin;
+            background-color: rgb(0, 76, 255);
+            border-radius: $base-border-radius * 2;
+            z-index: 0;
+            border: 2px solid white;
+            text-decoration: none;
+            height: 50px;
+            width: 160px;
+            font-size: $base-font-size;
+            overflow: hidden;
+            text-align: center;
+            span {
+                display: grid;
+                align-content: center;
+                width: 100%;
+                height: 100%;
+                color: white;
+                position: relative;
+                background: transparent;
+                &::before {
+                    @include full_before();
+                    background-color: rgb(37, 101, 250);
+                    width: 0;
+                    transition: 0.3s ease-in-out;
+                }
+            }
+            &:hover span::before {
+                width: 100%;
+            }
+        }
+    }
+    h1 {
+        font-size: $base-font-size * 4.6;
+    }
+}

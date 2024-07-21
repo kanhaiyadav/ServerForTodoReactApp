@@ -1,0 +1,68 @@
+* {
+  padding: 0px;
+  margin: 0px; }
+
+body {
+  background-image: url(../images/b5.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+  backdrop-filter: blur(3px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif; }
+  body main {
+    width: 35vw;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-radius: 20px;
+    background-color: rgba(202, 202, 202, 0.726);
+    box-shadow: 0px 0px 2px 2px rgba(200, 200, 200, 0.662); }
+    body main form {
+      background: transparent;
+      width: 80%;
+      margin: 40px;
+      position: relative; }
+      body main form div {
+        width: 100%;
+        border: 2px solid gray;
+        border-radius: 10px;
+        margin: 20px 0px;
+        position: relative; }
+        body main form div label {
+          position: absolute;
+          top: 30%;
+          left: 5%;
+          border-radius: 4px;
+          transition: 0.2s ease-in-out;
+          padding: 2px 5px;
+          z-index: -1; }
+        body main form div input {
+          background: transparent;
+          outline: none;
+          padding: 15px 10px;
+          font-size: 1.3rem;
+          border: none;
+          width: 90%; }
+      body main form button {
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+        background: linear-gradient(white, #EE7214);
+        font-size: 1.3rem; }
+        body main form button:hover {
+          border: 1px solid black;
+          color: white; }
+      body main form button[form] {
+        position: absolute;
+        bottom: 0;
+        right: 0; }
+  body a[id="signin"] {
+    position: relative;
+    color: white;
+    bottom: -50px; }
