@@ -17,7 +17,7 @@ const customMware = require('./config/middleware.js');
 const env = require('./config/environment.js');
 require('dotenv').config();
 const logger = require('morgan');
-// const cors = require('cors');
+const cors = require('cors');
 const { Server } = require('socket.io');
 const {createServer} = require('http');
 
@@ -36,11 +36,20 @@ if (env.name == 'development') {
     }))
 } 
 
-// app.use(cors( {
-//     origin: ["http://localhost:8000", "https://yourcheckmate.netlify.app"],
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     credentials: true
-// }));
+const allowedOrigins = ["http://localhost:8000", "https://yourcheckmate.netlify.app"];
+app.use(cors({
+    origin: function (origin, callback) {
+        // Allow requests with no origin like mobile apps or curl requests
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            const msg = 'The CORS policy for this site does not allow access from the specified origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 
 const server = createServer(app);
 const io = new Server(server, {
