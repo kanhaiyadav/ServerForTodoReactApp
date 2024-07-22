@@ -36,8 +36,11 @@ if (env.name == 'development') {
     }))
 } 
 
+// Define allowed origins
 const allowedOrigins = ["http://localhost:8000", "https://yourcheckmate.netlify.app"];
-app.use(cors({
+
+// CORS configuration
+const corsOptions = {
     origin: function (origin, callback) {
         // Allow requests with no origin like mobile apps or curl requests
         if (!origin) return callback(null, true);
@@ -49,7 +52,13 @@ app.use(cors({
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
-}));
+};
+
+// Apply CORS middleware
+app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions)); // This will handle OPTIONS requests for all routes
 
 const server = createServer(app);
 const io = new Server(server, {
