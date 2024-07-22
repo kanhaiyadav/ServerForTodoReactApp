@@ -14,7 +14,7 @@ let opts = {
     //extracting the token from the header
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     //the secret or key used to sign the token
-    secretOrKey: process.env.JWT_SECRET
+    secretOrKey: "todo"
 }
 
 //payload contains all the info about the user obtained by decoding the token
