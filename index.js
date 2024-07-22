@@ -17,7 +17,7 @@ const customMware = require('./config/middleware.js');
 const env = require('./config/environment.js');
 require('dotenv').config();
 const logger = require('morgan');
-const cors = require('cors');
+// const cors = require('cors');
 const { Server } = require('socket.io');
 const {createServer} = require('http');
 
@@ -36,11 +36,11 @@ if (env.name == 'development') {
     }))
 } 
 
-app.use(cors( {
-    origin: ["http://localhost:8000", "https://yourcheckmate.netlify.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
-}));
+// app.use(cors( {
+//     origin: ["http://localhost:8000", "https://yourcheckmate.netlify.app"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true
+// }));
 
 const server = createServer(app);
 const io = new Server(server, {
