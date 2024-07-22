@@ -37,7 +37,7 @@ if (env.name == 'development') {
 } 
 
 app.use(cors( {
-    origin: "http://localhost:8000",
+    origin: ["http://localhost:8000", "https://yourcheckmate.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
