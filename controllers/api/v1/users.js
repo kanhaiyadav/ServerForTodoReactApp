@@ -1,6 +1,6 @@
 const User = require('../../../model/users_model.js');
 const jwt = require('jsonwebtoken');
-// const env = require('../../../config/environment');
+require('dotenv').config();
 
 module.exports.createSession = async (req, res) => {
     try {
@@ -19,7 +19,7 @@ module.exports.createSession = async (req, res) => {
             message: "Signed in successfully",
             data: {
                 user: user,
-                token: "Bearer " + jwt.sign(user.toJSON(), 'todo', { expiresIn: '1d' })
+                token: "Bearer " + jwt.sign(user.toJSON(), process.env.JWT_SECRET, { expiresIn: '1d' })
             }
         })
     } catch (err) {
@@ -73,6 +73,25 @@ module.exports.verify = async (req, res) => {
         console.log(err);
         return res.status(500).json({
             message: "Internal Server Error"
+        });
+    }
+}
+
+module.exports.change_username = async (req, res) => {
+    try {
+        let user = await User.findById(req.user._id);
+        user.name = req.body.username;
+        await user.save();
+        return res.status(200).json({
+            data: {
+                name: req.body.username
+            },
+            message: "Username changed successfully"
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Failed to change username"
         });
     }
 }

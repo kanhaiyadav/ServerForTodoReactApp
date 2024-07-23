@@ -1,35 +1,15 @@
 let Task = require("../../../model/task_model.js");
+// let User = require("../../../model/user_model.js");
 
 module.exports.list = async (req, res) => {
     let tasks = await Task.find({user: req.user._id});
     return res.status(200).json({
+        data: {
+            tasks: tasks
+        },
         message: "Tasks fetched successfully",
-        tasks: tasks
     });
 }
-
-// module.exports.delete = async (req, res) => {
-//     try {
-//         let task = await Task.findById(req.params.id);
-//         console.log(task.user.toString(), req.user.id, task.user.toString() === req.user.id);
-//         if (task.user.toString() === req.user.id) {
-//             await Task.findByIdAndDelete(req.params.id);
-//             return res.status(200).json({
-//                 message: "Task deleted successfully"
-//             });
-//         } else {
-//             return res.status(401).json({
-//                 message: "Unauthorized, you cannot delete this post"
-//             })
-//         }
-//     }
-//     catch (error) {
-//         console.log(error);
-//         return res.status(500).json({
-//             message: "Failed to delete the task"
-//         });
-//     }
-// }
 module.exports.delete = async (req, res) => {
     try {
         console.log(req.params.id);
@@ -65,7 +45,7 @@ module.exports.create = async (req, res) => {
         await req.user.save();
         return res.status(200).json({
             data: {
-                task: task
+                task: task,
             },
             message: "Task created successfully"
         })
@@ -110,7 +90,7 @@ module.exports.mark_complete = async (req, res) => {
         await task.save();
         return res.status(200).json({
             data: {
-                id: req.params.id
+                id: req.params.id,
             },
             message: "Task marked as completed successfully"
         })
