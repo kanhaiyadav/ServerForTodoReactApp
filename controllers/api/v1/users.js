@@ -1,4 +1,5 @@
 const User = require('../../../model/users_model.js');
+const Task = require('../../../model/task_model.js');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -92,6 +93,27 @@ module.exports.change_username = async (req, res) => {
         console.log(err);
         return res.status(500).json({
             message: "Failed to change username"
+        });
+    }
+}
+
+module.exports.delete = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.tasks.forEach(async (taskid) => {
+            await Task.findByIdAndDelete(taskid);
+        });
+        await User.findByIdAndDelete(req.user._id);
+        return res.status(200).json({
+            message: "User deleted successfully",
+            data: {
+                _id: req.params.id
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({
+            message: "Failed to delete the user"
         });
     }
 }
