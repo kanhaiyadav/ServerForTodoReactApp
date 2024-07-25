@@ -1,5 +1,4 @@
 let Task = require("../../../model/task_model.js");
-let User = require("../../../model/user_model.js");
 
 module.exports.list = async (req, res) => {
     let tasks = await Task.find({user: req.user._id});
