@@ -1,5 +1,5 @@
 let Task = require("../../../model/task_model.js");
-// let User = require("../../../model/user_model.js");
+let User = require("../../../model/user_model.js");
 
 module.exports.list = async (req, res) => {
     let tasks = await Task.find({user: req.user._id});
@@ -15,6 +15,7 @@ module.exports.delete = async (req, res) => {
         console.log(req.params.id);
         await Task.findByIdAndDelete(req.params.id);
         await req.user.tasks.pull(req.params.id);
+        req.user.taskDeleted += 1;
         await req.user.save();
         return res.status(200).json({
             message: "Task deleted successfully",
@@ -33,7 +34,6 @@ module.exports.delete = async (req, res) => {
 
 module.exports.create = async (req, res) => {
     try {
-        console.log(req.user);
         let task = await Task.create({
             type: req.body.type || "due",
             description: req.body.description,
@@ -42,6 +42,7 @@ module.exports.create = async (req, res) => {
             user: req.user._id
         });
         await req.user.tasks.push(task._id);
+        req.user.taskCreated += 1;
         await req.user.save();
         return res.status(200).json({
             data: {
@@ -88,6 +89,8 @@ module.exports.mark_complete = async (req, res) => {
         let task = await Task.findById(req.params.id);
         task.due = false;
         await task.save();
+        req.user.taskCompleted += 1;
+        await req.user.save(); 
         return res.status(200).json({
             data: {
                 id: req.params.id,
